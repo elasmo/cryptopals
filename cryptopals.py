@@ -167,5 +167,5 @@ def detect_aes_ecb(ciphertext):
 	return
 
 # PKCS#7 padding 
-def pkcs7_padding:
-	
+def pkcs7_padding(block, block_size):
+    return
