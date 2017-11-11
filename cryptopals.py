@@ -3,6 +3,9 @@
 # Used for cryptopal challenges 
 # nov-2017
 #
+# Dependencies:
+# * py36-pycrypto
+# 
 import base64
 import binascii
 from string import ascii_lowercase

@@ -10,7 +10,7 @@ from base64 import b64decode
 data = open("6.txt", 'rb').read()
 ciphertext = b64decode(data)
 
-#print("Ciphertext:", ciphertext)
+print("Ciphertext:", ciphertext)
 
 if __name__ == "__main__":
 	# Find key length
@@ -21,7 +21,7 @@ if __name__ == "__main__":
 	ciphertext_blocks = split_string(ciphertext, guessed_keylen)
 	ciphertext_transp = transp_blks(ciphertext_blocks)
 
-	# Decrypt transposed ciphertext blocks using key ascii 0-255
+	# Decrypt transposed ciphertext blocks using ascii [0-255] as key
 	# ..and try find key that harvest the best scores
 	guessed_key = ""
 
