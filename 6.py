@@ -46,6 +46,6 @@ if __name__ == "__main__":
 	# Finally!
 	deciphered = ""
 	for i in range(len(ciphertext_blocks)):
-		deciphered += repeating_xor_dec(ciphertext_blocks[i], guessed_key)
+		deciphered += repeating_key_xor(ciphertext_blocks[i], guessed_key)
 
 	print("Dechiphered:\n" + deciphered)

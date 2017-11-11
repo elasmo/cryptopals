@@ -125,7 +125,7 @@ def transp_blks(blks):
 	return transp_list
 
 # Repeating-XOR decipher
-def repeating_xor_dec(ciphertext, key):
+def repeating_key_xor(ciphertext, key):
 	if len(ciphertext) != len(key):
 		# XXX: should I use padding instead(?)
 		key = key[0:len(ciphertext)]
