@@ -4,17 +4,6 @@
 # 
 
 from cryptopals import *
-"""
-from cryptopals import ham_distance
-from cryptopals import split_string
-from cryptopals import transp_blks
-from cryptopals import single_xor_dec
-from cryptopals import repeating_xor_dec
-from cryptopals import count_chars
-from cryptopals import calc_score
-from cryptopals import guess_keylen
-"""
-
 from string import ascii_letters
 from base64 import b64decode
 
