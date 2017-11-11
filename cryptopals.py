@@ -143,8 +143,8 @@ def repeating_key_xor(ciphertext, key):
     return buf
 
 
-# Single byte XOR decipher
-def single_xor_dec(ciphertext, key):
+# Single key XOR
+def single_key_xor(ciphertext, key):
     plaintext = ""
     
     for i in range(len(ciphertext)):

@@ -30,7 +30,7 @@ if __name__ == "__main__":
         key_part = ""
 
         for key in range(0, 255):
-            plaintext = single_xor_dec(ciphertext_transp[i], key)
+            plaintext = single_key_xor(ciphertext_transp[i], key)
 
             freq  = count_chars(plaintext)
             score = calc_score(freq)

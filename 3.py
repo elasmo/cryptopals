@@ -5,7 +5,7 @@
 import binascii
 from string import ascii_letters
 from string import ascii_lowercase
-from cryptopals import single_xor_dec
+from cryptopals import single_key_xor
 
 cipherstr = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
 ciphertext = binascii.unhexlify(cipherstr)
@@ -26,7 +26,7 @@ score = {}
 
 # Try decrypt cipher text using keys A-Aa-z and store in list
 for key in ascii_letters:
-	buffers.append(single_xor_dec(ciphertext, key))
+	buffers.append(single_key_xor(ciphertext, key))
 
 # Count characters
 for buf in buffers:
