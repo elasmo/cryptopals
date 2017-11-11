@@ -4,7 +4,8 @@
 #
 from cryptopals import pkcs7_padding
 
-message = "YELLOW SUBMARINE"
-block_size = 20
+if __name__ == 'main':
+    message = "YELLOW SUBMARINE"
+    block_size = 20
 
-print(pkcs7_padding(message, block_size))
+    print(pkcs7_padding(message, block_size))

@@ -168,17 +168,10 @@ def aes_ecb_dec(ciphertext, key):
 
 # PKCS#7 padding 
 def pkcs7_padding(block, block_size):
-    block_len = len(block)
-
-    if block is str:
-        block = bytes(block)
-
-    if block_len > block_size:
-        raise ValueError("Block length is larger than block size")
-
     padding_len = block_size - (len(block) % block_size)
-    for p in range(padding_len):
-        block += bytes(padding_len)
+    block = str.encode(block)
 
-    print(padding_len)
+    for p in range(padding_len):
+        block += bytes(chr(padding_len), 'utf-8')
+
     return block
