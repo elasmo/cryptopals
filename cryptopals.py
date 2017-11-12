@@ -10,6 +10,7 @@ import base64
 import binascii
 from string import ascii_lowercase
 from Crypto.Cipher import AES
+from Crypto import Random
 
 # Letter frequency in english text
 freq_en = { 
@@ -160,6 +161,26 @@ def single_key_xor(ciphertext, key):
 
     return plaintext
 
+# Encrypt with AES in CBC mode
+def aes_cbc_enc(plaintext, key): 
+    key = str.encode(key)   # convert string to bytes
+
+    cipher = AES.new(key, AES.MODE_ECB)
+
+    iv = Random.new().read(cipher.block_size) 
+    plaintext = pkcs7_padding(plaintext, AES.block_size)
+
+    res = ""
+    for i in range(cipher.block_size):
+        res += chr(iv[i]^plaintext[i])
+
+    print("IV\t", type(iv))
+    print("Plain\t", type(plaintext))
+    print("Result\t", type(res))
+    print("Key\t", type(key))
+    print("IV:",len(iv),"Plain:",len(plaintext),"Resul:",len(res))
+
+    return cipher.encrypt(res)
 
 # Decrypt AES cipher in ECB mode
 def aes_ecb_dec(ciphertext, key):
