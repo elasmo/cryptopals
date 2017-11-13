@@ -163,7 +163,6 @@ def single_key_xor(ciphertext, key):
 # Encrypt with AES in CBC mode
 def aes_cbc_enc(plaintext, key, iv):
     key = str.encode(key)   # convert string to bytes
-
     cipher = AES.new(key, AES.MODE_ECB)
 
     plaintext = pkcs7_padding(plaintext, AES.block_size)
