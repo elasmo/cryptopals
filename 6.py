@@ -4,7 +4,6 @@
 # 
 
 from cryptopals import *
-from string import ascii_letters
 from base64 import b64decode
 
 data = open("6.txt", 'rb').read()
