@@ -11,19 +11,21 @@ if len(argv) <= 1:
     print("Usage: {} <filename>".format(basename(argv[0])))
     exit(0)
 
-ciphertext = ""
-filename = argv[1]
-key = "ICE"
 
-with open(filename, 'rb') as fo:
-    while True:
-        chunk = fo.read(len(key))
+if __name__ == "__main__":
+    ciphertext = ""
+    filename = argv[1]
+    key = "ICE"
 
-        if not chunk:
-            break
+    with open(filename, 'rb') as fo:
+        while True:
+            chunk = fo.read(len(key))
 
-	print("Processing '" + str(chunk) + "'")
-        ciphertext += repeating_key_xor(chunk, key)
+            if not chunk:
+                break
 
-print("Encrypted:")
-print(''.join('{:02x}'.format(ord(c)) for c in ciphertext))
+            print("Processing '" + str(chunk) + "'")
+            ciphertext += repeating_key_xor(chunk, key)
+
+    print("Encrypted:")
+    print(''.join('{:02x}'.format(ord(c)) for c in ciphertext))
