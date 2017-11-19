@@ -100,8 +100,8 @@ def hexstr_xor(str1, str2):
     hex_two = binascii.unhexlify(str2)
 
     result = ""
-    for c in range(len(hex_one)):
-    	result += chr(hex_one[c]^hex_two[c])
+    for val1, val2 in zip(hex_one, hex_two):
+        result += chr(val1^val2)
 
     # str.encode returns a utf-8 encoded (default) bytes object
     return binascii.hexlify(str.encode(result))
