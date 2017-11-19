@@ -348,8 +348,8 @@ freq_en = {
 def decipher(key, text):
     deciphered = ""
 
-    for i, char in enumerate(text):
-        deciphered += chr(text[i]^key).lower()
+    for char in text:
+        deciphered += chr(char^key).lower()
 
     return deciphered
 
