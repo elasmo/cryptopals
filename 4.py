@@ -347,7 +347,8 @@ freq_en = {
 # Dechiper text 
 def decipher(key, text):
     deciphered = ""
-    for i in range(len(text)):
+
+    for i, char in enumerate(text):
         deciphered += chr(text[i]^key).lower()
 
     return deciphered
@@ -381,12 +382,12 @@ if __name__ == "__main__":
     likely_success = ""
 
     # Convert hexadecimal strings to binary
-    for i in range(len(cprlist)):
+    for i, cprtext in enumerate(cprlist):
         cprlist[i] = binascii.unhexlify(cprlist[i])
 
     # Loop through cipher texts and try keys A-Za-z
     for cpr in cprlist:
-        for key in range(0,255):
+        for key in range(0, 255):
             # Decipher text using key [0-255]
             plaintext = decipher(key, cpr)
 
