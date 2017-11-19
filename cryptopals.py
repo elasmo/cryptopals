@@ -147,17 +147,17 @@ def repeating_key_xor(ciphertext, key):
 def single_key_xor(ciphertext, key):
     plaintext = ""
     
-    for i in range(len(ciphertext)):
-        if type(ciphertext[i]) is str:
-            ct = ord(ciphertext[i])
+    for char in ciphertext:
+        if type(char) is str:
+            ct = ord(char)
         else:
-            ct = ciphertext[i]
-            
+            ct = char
+
         if type(key) is str:
             key = ord(key)
-        
-        plaintext += chr(ct^key)
 
+        plaintext += chr(ct^key)
+    
     return plaintext
 
 # Encrypt with AES in CBC mode
