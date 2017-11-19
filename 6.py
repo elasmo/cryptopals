@@ -24,7 +24,7 @@ if __name__ == "__main__":
     # ..and try find key that harvest the best scores
     guessed_key = ""
 
-    for i in range(len(ciphertext_transp)):
+    for i, cph_transp in enumerate(ciphertext_transp):
         score = old_score = 0
         key_part = ""
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     # Finally!
     deciphered = ""
-    for i in range(len(ciphertext_blocks)):
+    for i, cph_block in enumerate(ciphertext_blocks):
         deciphered += repeating_key_xor(ciphertext_blocks[i], guessed_key)
 
     print("Dechiphered:\n" + deciphered)
