@@ -21,15 +21,15 @@ if __name__ == "__main__":
     ciphertext_transp = transp_blks(ciphertext_blocks)
 
     # Decrypt transposed ciphertext blocks using ascii [0-255] as key
-    # ..and try find key that harvest the best scores
+    # ..and try finding the key that harvest the best scores
     guessed_key = ""
 
-    for i, cph_transp in enumerate(ciphertext_transp):
+    for i, text_blk in enumerate(ciphertext_transp):
         score = old_score = 0
         key_part = ""
 
         for key in range(0, 255):
-            plaintext = single_key_xor(ciphertext_transp[i], key)
+            plaintext = single_key_xor(text_blk, key)
 
             freq  = count_chars(plaintext)
             score = calc_score(freq)
