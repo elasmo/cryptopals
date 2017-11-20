@@ -12,6 +12,6 @@ if __name__ == "__main__":
         ciphertext = f.read()
 
     ciphertext = b64decode(ciphertext)
-    plaintext = aes_ecb_dec(ciphertext, key)
+    plaintext  = aes_ecb_dec(ciphertext, key)
 
     print(plaintext)
