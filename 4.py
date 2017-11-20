@@ -346,11 +346,10 @@ if __name__ == "__main__":
     for i, cprtext in enumerate(cprlist):
         cprlist[i] = binascii.unhexlify(cprtext)
 
-    # Loop through cipher texts and try keys A-Za-z
+    # Loop through cipher texts and try keys [0-254]
     print("Bruteforcing keys...")
     for cpr in cprlist:
-        for key in range(0, 255):
-            # Decipher text using key [0-255]
+        for key in range(255):
             plaintext = single_key_xor(cpr, key)
 
             # Count character frequency
