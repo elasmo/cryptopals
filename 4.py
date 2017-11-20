@@ -345,7 +345,6 @@ if __name__ == "__main__":
         cprlist[i] = binascii.unhexlify(cprtext)
 
     # Loop through cipher texts and try keys [0-254]
-    print("Bruteforcing keys...")
     for cpr in cprlist:
         for key in range(255):
             deciphered = single_key_xor(cpr, key)
@@ -356,4 +355,4 @@ if __name__ == "__main__":
                 plaintext = deciphered
                 old_score = score
 
-    print("Likely deciphered text: " + plaintext)
+    print("Plaintext: " + plaintext)
