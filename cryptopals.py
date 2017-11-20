@@ -77,7 +77,7 @@ def guess_keylen(ciphertext, minlen, maxlen):
 
     return guessed_keylen
 
-# Calculate hamming distance between two strings
+# Calculate hamming distance between two strings of equal length
 def ham_distance(str1, str2):
     if len(str1) != len(str2):
         raise ValueError("Strings not of equal length")
@@ -92,7 +92,7 @@ def ham_distance(str1, str2):
 def hexstr_to_b64(text):
     return base64.b64encode(binascii.unhexlify(text))
 
-# Take two equal-length buffers and produce their XOR combination
+# Take two equal length buffers and produce their XOR combination
 def hexstr_xor(str1, str2):
     if len(str1) != len(str2):
     	raise ValueError("Strings not of equal length")

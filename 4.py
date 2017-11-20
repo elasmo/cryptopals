@@ -8,7 +8,7 @@ from cryptopals import single_key_xor
 from cryptopals import count_chars
 from cryptopals import calc_score
 
-cprlist = [
+ciphertexts = [
     '0e3647e8592d35514a081243582536ed3de6734059001e3f535ce6271032',
     '334b041de124f73c18011a50e608097ac308ecee501337ec3e100854201d',
     '40e127f51c10031d0133590b1e490f3514e05a54143d08222c2a4071e351',
@@ -341,17 +341,17 @@ if __name__ == "__main__":
     old_score = score = 0
 
     # Convert hexadecimal strings to binary
-    for i, cprtext in enumerate(cprlist):
-        cprlist[i] = binascii.unhexlify(cprtext)
+    for i, ciphertext in enumerate(ciphertexts):
+        ciphertexts[i] = binascii.unhexlify(ciphertext)
 
     # Loop through cipher texts and try keys [0-254]
-    for cpr in cprlist:
+    for ciphertext in ciphertexts:
         for key in range(255):
-            deciphered = single_key_xor(cpr, key)
+            deciphered = single_key_xor(ciphertext, key)
             freq  = count_chars(deciphered)
             score = calc_score(freq)
 
-            if score > old_score :
+            if score > old_score:
                 plaintext = deciphered
                 old_score = score
 
