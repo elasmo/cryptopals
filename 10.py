@@ -5,6 +5,8 @@
 from sys import argv, exit
 from os.path import basename
 from cryptopals import aes_cbc_enc
+from cryptopals import aes_ecb_dec
+
 from Crypto import Random
 
 if len(argv) <= 1:
@@ -34,8 +36,11 @@ if __name__ == "__main__":
     plaintext = b"blahblah0123askdsadklasdsak"
     key = b"YELLOW SUBMARINE"
     iv = Random.new().read(16) 
+    ciphertext = aes_cbc_enc(plaintext, key, iv)
 
     print("Plaintext\t", plaintext)
     print("Key\t", key)
     print("IV\t", iv)
-    print("Encrypted\t", aes_cbc_enc(plaintext, key, iv))
+    print("Ciphertext\t", ciphertext)
+    print("Decrypted\t", aes_ecb_dec(ciphertext, key))
+

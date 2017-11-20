@@ -167,6 +167,7 @@ def aes_cbc_enc(plaintext, key, iv):
     plaintext = pkcs7_padding(plaintext, AES.block_size)
 
     result = b""
+    # XXX: broken
     for i, p in zip(iv, plaintext):
         result += str.encode(chr(i^p), 'iso-8859-1')
 

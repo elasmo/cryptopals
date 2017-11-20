@@ -13,7 +13,7 @@ print("Ciphertext:", ciphertext)
 
 if __name__ == "__main__":
     # Guess key length
-    guessed_keylen = guess_keylen(ciphertext, 2, 40)
+    guessed_keylen = guess_keylen(ciphertext, minlen=2, maxlen=40)
     print("Guessed key length:", guessed_keylen)
 
     # Split ciphertext in keylen n byte blocks and transpose 
