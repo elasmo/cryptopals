@@ -21,7 +21,8 @@ freq_en = {
     'z' : 0.074, ' ' : 4.025
 }
 
-# Perform frequency analysis and correlate with english language freq and return score
+# Letter frequency analysis. Score is based on a english reference added with
+# the current letter frequency.
 def calc_score(freqs):
     score = 0
     for char, occur in freqs.items():
@@ -29,15 +30,15 @@ def calc_score(freqs):
 
     return score
 
-# Count ascii letters in a string
+# Count lowercase ascii letters in a string
 def count_chars(text):
     freqs = dict.fromkeys(ascii_lowercase, 0)
     freqs.update({' ' : 0})
     
-    for c in text.lower():
-        val = ord(c)
+    for char in text.lower():
+        val = ord(char)
         if val >= ord('a') and val <= ord('z') or val == ord(' '):
-            freqs[c] += 1
+            freqs[char] += 1
             
     return freqs
 
@@ -52,7 +53,7 @@ def guess_keylen(ciphertext, minlen, maxlen):
 
 	# The length of n bytes with smallest hamming distance is probably
 	# the length of the key.
-	# Compare the first block of n bytes with the follow blocks and
+	# Compare the first block of n bytes with the following blocks and
 	# calculate an average.
 
         hamdist_list = []
@@ -133,16 +134,15 @@ def repeating_key_xor(ciphertext, key):
     	key = key[0:len(ciphertext)]
 	
     buf = ""
-    for m, k in zip(key, ciphertext):
-        if type(m) is str:
-            m = ord(m)
-        if type(k) is str:
-            k = ord(k)
+    for char, key in zip(key, ciphertext):
+        if type(char) is str:
+            char = ord(char)
+        if type(key) is str:
+            key = ord(key)
 
-        buf += chr(m^k)
+        buf += chr(char^key)
 
     return buf
-
 
 # Single key XOR
 def single_key_xor(ciphertext, key):
@@ -150,29 +150,27 @@ def single_key_xor(ciphertext, key):
     
     for char in ciphertext:
         if type(char) is str:
-            ct = ord(char)
+            char = ord(char)
         else:
-            ct = char
+            char = char
 
         if type(key) is str:
             key = ord(key)
 
-        plaintext += chr(ct^key)
+        plaintext += chr(char^key)
     
     return plaintext
 
 # Encrypt with AES in CBC mode
 def aes_cbc_enc(plaintext, key, iv):
-    key = str.encode(key)   # convert string to bytes
     cipher = AES.new(key, AES.MODE_ECB)
-
     plaintext = pkcs7_padding(plaintext, AES.block_size)
 
-    res = b""
-    for i in range(cipher.block_size):
-        res += str.encode(chr(iv[i]^plaintext[i]), 'iso-8859-1')
+    result = b""
+    for i, p in zip(iv, plaintext):
+        result += str.encode(chr(i^p), 'iso-8859-1')
 
-    return cipher.encrypt(res)
+    return cipher.encrypt(result)
 
 # Decrypt AES cipher in ECB mode
 def aes_ecb_dec(ciphertext, key):

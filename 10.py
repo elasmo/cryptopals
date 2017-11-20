@@ -12,9 +12,10 @@ if len(argv) <= 1:
     exit(1)
 
 if __name__ == "__main__":
+    """
     filename = argv[1]
     block_size = 16
-    key = "YELLOW SUBMARINE"
+    key = b"YELLOW SUBMARINE"
     iv = b'\x00' * block_size
     ciphertext = b""
 
@@ -29,12 +30,12 @@ if __name__ == "__main__":
 
     print(ciphertext)
     """
-    plaintext = "blahblah"
-    key = "YELLOW SUBMARINE"
+
+    plaintext = b"blahblah0123askdsadklasdsak"
+    key = b"YELLOW SUBMARINE"
     iv = Random.new().read(16) 
 
     print("Plaintext\t", plaintext)
     print("Key\t", key)
     print("IV\t", iv)
     print("Encrypted\t", aes_cbc_enc(plaintext, key, iv))
-    """
