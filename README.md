@@ -1,2 +1,2 @@
 # Cryptopal challenge solutions
-A heap of python porridge intended to solve the cryptopals (https://www.cryptopals.com) challenges.
+A heap of porridge written in Python3 with the intent to solve the [cryptopals crypto challenges](https://www.cryptopals.com).
