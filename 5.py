@@ -11,7 +11,6 @@ if len(argv) <= 1:
     print("Usage: {} <filename>".format(basename(argv[0])))
     exit(0)
 
-
 if __name__ == "__main__":
     ciphertext = ""
     filename = argv[1]

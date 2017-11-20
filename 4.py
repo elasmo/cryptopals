@@ -4,6 +4,9 @@
 #
 import binascii
 import string
+from cryptopals import single_key_xor
+from cryptopals import count_chars
+from cryptopals import calc_score
 
 cprlist = [
     '0e3647e8592d35514a081243582536ed3de6734059001e3f535ce6271032',
@@ -334,48 +337,6 @@ cprlist = [
     '4c071a57e9356ee415103c5c53e254063f2019340969e30a2e381d5b2555',
     '32042f46431d2c44607934ed180c1028136a5f2b26092e3b2c4e2930585a' ]
 
-# Letter frequency in english lang
-freq_en = { 
-    'a' : 8.167, 'b' : 1.492, 'c' : 2.782, 'd' : 4.253, 'e' : 12.702,
-    'f' : 2.228, 'g' : 2.015, 'h' : 6.094, 'i' : 6.966, 'j' : 0.153, 
-    'k' : 0.772, 'l' : 4.025, 'm' : 2.406, 'n' : 6.749, 'o' : 7.507, 
-    'p' : 1.929, 'q' : 0.095, 'r' : 5.987, 's' : 6.327, 't' : 9.056, 
-    'u' : 2.758, 'v' : 0.978, 'w' : 2.360, 'x' : 0.150, 'y' : 1.974, 
-    'z' : 0.074, ' ' : 4.025
-}
-
-# Dechiper text 
-def decipher(key, text):
-    deciphered = ""
-
-    for char in text:
-        deciphered += chr(char^key).lower()
-
-    return deciphered
-
-# Correlate character frequency and score it in comparance with the
-# the character frequency in the english language.
-def calc_score(text):
-    freqs = {}
-
-    # Initialize buffer
-    freqs = dict.fromkeys(string.ascii_lowercase, 0) 
-    freqs.update({' ' : 0})
-
-    # Count character occurrances
-    for char in text:
-        val = ord(char)
-
-        if val >= ord('a') and val <= ord('z') or val == ord(' '):
-            freqs[char] += 1
-
-    score = 0
-    for char, occurance in freqs.items():
-        score += freq_en[char] + occurance
-
-    return score
-
-
 if __name__ == "__main__":
     old_score = 0
     score = 0
@@ -383,18 +344,22 @@ if __name__ == "__main__":
 
     # Convert hexadecimal strings to binary
     for i, cprtext in enumerate(cprlist):
-        cprlist[i] = binascii.unhexlify(cprlist[i])
+        cprlist[i] = binascii.unhexlify(cprtext)
 
     # Loop through cipher texts and try keys A-Za-z
+    print("Bruteforcing keys...")
     for cpr in cprlist:
         for key in range(0, 255):
             # Decipher text using key [0-255]
-            plaintext = decipher(key, cpr)
+            plaintext = single_key_xor(cpr, key)
+
+            # Count character frequency
+            char_freq  = count_chars(plaintext)
 
             # Calculate score
-            current_score = calc_score(plaintext)
+            current_score = calc_score(char_freq)
             if(current_score > old_score):
-                likely_success = plaintext
+                likely_success = plaintext + "using key: " + chr(key)
                 old_score = current_score
 
 print("Likely deciphered text: " + likely_success)

@@ -118,8 +118,9 @@ def transp_blks(blks):
     keylen = len(blks[0])
     for char in range(keylen):
         buf = bytes()
-        for i in range(len(blks)):
-            buf += blks[i][char:char+1]
+
+        for block in blks:
+            buf += block[char:char+1]
 
         transp_list.append(buf)
 
@@ -181,7 +182,9 @@ def aes_ecb_dec(ciphertext, key):
 # PKCS#7 padding 
 def pkcs7_padding(block, block_size):
     padding_len = block_size - (len(block) % block_size)
-    block = str.encode(block)
+
+    if block is str:
+        block = str.encode(block)
 
     for p in range(padding_len):
         block += bytes(chr(padding_len), 'utf-8')
