@@ -38,13 +38,13 @@ if __name__ == "__main__":
                 old_score = score
                 key_part = chr(key)
 
-        guessed_key += key_part
+        guessed_key = ''.join([guessed_key, key_part])
 
     print("Encryption key: " + guessed_key)
 
     # Finally!
     deciphered = ""
     for block in ciphertext_blocks:
-        deciphered += repeating_key_xor(block, guessed_key)
+        deciphered = ''.join([deciphered, repeating_key_xor(block, guessed_key)])
 
     print("Dechiphered:\n" + deciphered)
