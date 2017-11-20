@@ -9,22 +9,23 @@ import binascii
 
 if len(argv) <= 1:
     print("Usage: {} <filename>".format(basename(argv[0])))
-    exit(0)
+    exit(1)
 
 if __name__ == "__main__":
     ciphertext = ""
-    filename = argv[1]
-    key = "ICE"
+    filename   = argv[1]
+    key        = b"ICE"
+    key_len    = len(key)
 
-    with open(filename, 'rb') as fo:
+    with open(filename, 'rb') as f:
         while True:
-            chunk = fo.read(len(key))
+            chunk = f.read(key_len)
 
             if not chunk:
                 break
 
-            print("Processing '" + str(chunk) + "'")
+            print("Processing", chunk)
             ciphertext += repeating_key_xor(chunk, key)
 
-    print("Encrypted:")
+    print("Ciphertext:")
     print(''.join('{:02x}'.format(ord(c)) for c in ciphertext))

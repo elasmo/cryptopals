@@ -29,7 +29,7 @@ def calc_score(freqs):
 
     return score
 
-# Count ascii letters im a string
+# Count ascii letters in a string
 def count_chars(text):
     freqs = dict.fromkeys(ascii_lowercase, 0)
     freqs.update({' ' : 0})
@@ -112,14 +112,14 @@ def split_string(text, block_size):
 
 # Transpose blocks: make a block that is the first byte of every block, 
 # and a block that is the second byte of every block, and so on. 
-def transp_blks(blks):
+def transp_blocks(blocks):
     transp_list = []
 
-    keylen = len(blks[0])
+    keylen = len(blocks[0])
     for char in range(keylen):
         buf = bytes()
 
-        for block in blks:
+        for block in blocks:
             buf += block[char:char+1]
 
         transp_list.append(buf)
