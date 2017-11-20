@@ -6,7 +6,9 @@
 from cryptopals import *
 from base64 import b64decode
 
-data = open("6.txt", 'rb').read()
+with open("6.txt", "rb") as f:
+    data = f.read()
+
 ciphertext = b64decode(data)
 
 print("Ciphertext:", ciphertext)

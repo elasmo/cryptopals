@@ -6,9 +6,12 @@ from cryptopals import aes_ecb_dec
 from base64 import b64decode
 
 if __name__ == "__main__":
-    key = "YELLOW SUBMARINE"
-    f = open("7.txt", 'r')
-    msg = f.read()
-    f.close()
-    
-    print(aes_ecb_dec(b64decode(msg), key))
+    key = b"YELLOW SUBMARINE"
+
+    with open("7.txt", "rb") as f:
+        ciphertext = f.read()
+
+    ciphertext = b64decode(ciphertext)
+    plaintext = aes_ecb_dec(ciphertext, key)
+
+    print(plaintext)
