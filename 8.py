@@ -7,16 +7,15 @@ from cryptopals import split_string
 if __name__ == '__main__':
     with open("8.txt", 'rb') as f:
         block_size = 16
-        uniq_blocks = 0
-	
-        eylen = 0
-        oldlen = 1337
+        old_uniq   = 1024 # max value 
+        text = ""
+
         for ciphertext in f:
-            uniqs = set(split_string(ciphertext.strip(b'\n'), block_size))
+            uniq_blocks = set(split_string(ciphertext.strip(b'\n'), block_size))
 
-            n_uniqs = len(uniqs)
-            if n_uniqs < oldlen:
-                eylen = ciphertext
-                oldlen = n_uniqs
+            uniq = len(uniq_blocks)
+            if uniq < old_uniq:
+                text = ciphertext
+                old_uniq = uniq
 
-    print("Probably encrypted in AES ECB m0de: {:}\n".format(eylen))
+    print("Probably encrypted in AES ECB mode: {:}\n".format(text))
