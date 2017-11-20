@@ -338,9 +338,7 @@ cprlist = [
     '32042f46431d2c44607934ed180c1028136a5f2b26092e3b2c4e2930585a' ]
 
 if __name__ == "__main__":
-    old_score = 0
-    score = 0
-    likely_success = ""
+    old_score = score = 0
 
     # Convert hexadecimal strings to binary
     for i, cprtext in enumerate(cprlist):
@@ -350,15 +348,12 @@ if __name__ == "__main__":
     print("Bruteforcing keys...")
     for cpr in cprlist:
         for key in range(255):
-            plaintext = single_key_xor(cpr, key)
+            deciphered = single_key_xor(cpr, key)
+            freq  = count_chars(deciphered)
+            score = calc_score(freq)
 
-            # Count character frequency
-            char_freq  = count_chars(plaintext)
+            if score > old_score :
+                plaintext = deciphered
+                old_score = score
 
-            # Calculate score
-            current_score = calc_score(char_freq)
-            if(current_score > old_score):
-                likely_success = plaintext + "using key: " + chr(key)
-                old_score = current_score
-
-print("Likely deciphered text: " + likely_success)
+    print("Likely deciphered text: " + plaintext)
